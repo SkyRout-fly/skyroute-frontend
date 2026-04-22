@@ -1,7 +1,9 @@
 import { useState } from "react";
+import Home from "./pages/Home";
 
-function App() {
+export default function App() {
   const API = process.env.REACT_APP_API_URL;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -11,10 +13,12 @@ function App() {
     const res = await fetch(`${API}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
+
     const text = await res.text();
     const match = text.match(/<textarea.*?>(.*?)<\/textarea>/);
+
     if (match) {
       localStorage.setItem("token", match[1]);
       setToken(match[1]);
@@ -31,43 +35,10 @@ function App() {
     setFlights(data.itineraries || []);
   }
 
+  // ✅ SHOW LOGIN SCREEN
   if (!token) {
     return (
-      <div style={{ padding: 20 }}>
-        <h2>Login</h2>
-        <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-        <br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={e => setPassword(e.target.value)}
-        />
-        <br /><br />
-        <button onClick={login}>Login</button>
-      </div>
-    );
-  }
+      <div className="min-h-screen flex items-center justify-center bg-blue-900">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+          <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
 
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>SkyRoute Dashboard</h2>
-      <button onClick={searchFlights}>Search Flights</button>
-      <ul>
-        {flights.map((_, i) => (
-          <li key={i}>Flight Option {i + 1}</li>
-        ))}
-      </ul>
-      <br />
-      <button
-        onClick={() => {
-          localStorage.removeItem("token");
-          setToken(null);
-        }}
-      >
-        Logout
-      </button>
-    </div>
-  );
-}
-
-export default App;
