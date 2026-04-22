@@ -35,10 +35,77 @@ export default function App() {
     setFlights(data.itineraries || []);
   }
 
-  // ✅ SHOW LOGIN SCREEN
+  /* ============================
+     🔐 LOGIN VIEW
+  ============================ */
   if (!token) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-blue-900">
         <div className="bg-white p-8 rounded-lg shadow-lg w-96">
           <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
 
+          <input
+            className="border p-3 w-full mb-3 rounded"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            className="border p-3 w-full mb-4 rounded"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button
+            onClick={login}
+            className="bg-blue-600 text-white w-full py-3 rounded font-semibold"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ============================
+     ✅ LOGGED‑IN VIEW
+  ============================ */
+  return (
+    <>
+      {/* Skyscanner‑style Home */}
+      <Home />
+
+      {/* Dashboard / Results section */}
+      <div className="max-w-6xl mx-auto p-6">
+        <button
+          onClick={searchFlights}
+          className="bg-blue-600 text-white px-6 py-3 rounded mb-4"
+        >
+          Search Flights
+        </button>
+
+        <ul className="space-y-2">
+          {flights.map((_, i) => (
+            <li
+              key={i}
+              className="border p-4 rounded bg-white shadow"
+            >
+              Flight Option {i + 1}
+            </li>
+          ))}
+        </ul>
+
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            setToken(null);
+          }}
+          className="mt-6 text-red-600 underline"
+        >
+          Logout
+        </button>
+      </div>
+    </>
+  );
+}
