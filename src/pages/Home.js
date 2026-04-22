@@ -10,7 +10,7 @@ export default function Home({ searchFlights, from, setFrom, to, setTo, date, se
     // North America
     { code: 'JFK', city: 'New York', name: 'John F. Kennedy International', country: 'USA' },
     { code: 'LAX', city: 'Los Angeles', name: 'Los Angeles International', country: 'USA' },
-    { code: 'ORD', city: 'Chicago', name: 'O'Hare International', country: 'USA' },
+    { code: 'ORD', city: 'Chicago', name: 'O\'Hare International', country: 'USA' },
     { code: 'MIA', city: 'Miami', name: 'Miami International', country: 'USA' },
     { code: 'SFO', city: 'San Francisco', name: 'San Francisco International', country: 'USA' },
     { code: 'SEA', city: 'Seattle', name: 'Seattle-Tacoma International', country: 'USA' },
