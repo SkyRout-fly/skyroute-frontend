@@ -35,14 +35,16 @@ export default function App() {
     setFlights(data.itineraries || []);
   }
 
-  /* ============================
+  /* ======================
      🔐 LOGIN VIEW
-  ============================ */
+  ====================== */
   if (!token) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-blue-900">
         <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-          <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            Login
+          </h2>
 
           <input
             className="border p-3 w-full mb-3 rounded"
@@ -59,7 +61,7 @@ export default function App() {
 
           <button
             onClick={login}
-            className="bg-blue-600 text-white w-full py-3 rounded font-semibold"
+            className="bg-blue-600 text-white w-full py-3 rounded font-semibold hover:bg-blue-700 transition"
           >
             Login
           </button>
@@ -68,15 +70,13 @@ export default function App() {
     );
   }
 
-  /* ============================
+  /* ======================
      ✅ LOGGED‑IN VIEW
-  ============================ */
+  ====================== */
   return (
     <>
-      {/* Skyscanner‑style Home */}
       <Home />
 
-      {/* Dashboard / Results section */}
       <div className="max-w-6xl mx-auto p-6">
         <button
           onClick={searchFlights}
